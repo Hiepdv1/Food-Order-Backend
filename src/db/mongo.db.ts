@@ -4,7 +4,7 @@ import { logger } from "../logs";
 const connectDb = () => {
     if (process.env.MONGO_URI) {
         mongoose
-            .connect(process.env.MONGO_URI, { replicaSet: "rs0" })
+            .connect(process.env.MONGO_URI)
             .then(() => {
                 logger.info("Connected to mongoose successfully");
             })

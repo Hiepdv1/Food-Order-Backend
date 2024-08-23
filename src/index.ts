@@ -1,4 +1,6 @@
 import express from "express";
+import dotenv from "dotenv";
+dotenv.config();
 
 import InitializeApp from "./services/InitializeApp.service";
 import { logger } from "./logs";

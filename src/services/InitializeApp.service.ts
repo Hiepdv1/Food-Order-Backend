@@ -1,6 +1,4 @@
 import "../customs/ExpressLayerEnhancer.custom";
-import dotenv from "dotenv";
-dotenv.config();
 
 import { initRedis } from "../db";
 import { logger } from "../logs";

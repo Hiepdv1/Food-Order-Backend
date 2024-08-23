@@ -1,23 +1,20 @@
 import Redis, { RedisOptions } from "ioredis";
 import { logger } from "../logs";
 
-const portEnv = process.env.REDIS_PORT;
+const configRedis: RedisOptions = {
+    host: process.env.REDIS_HOST,
+    port: process.env.REDIS_PORT
+        ? Number.parseInt(process.env.REDIS_PORT)
+        : 6048,
+    password: process.env.REDIS_PASSWORD,
+    retryStrategy: function (times) {
+        const delay = Math.min(times * 100, 3000);
+        logger.debug(`Reconnecting Attempt Number: ${delay}`);
+        return delay;
+    },
+};
 
-// const configRedis: RedisOptions = {
-//     host: process.env.REDIS_HOSTNAME,
-//     port: portEnv ? Number.parseInt(portEnv) : 6379,
-//     // username: process.env.REDIS_USERNAME,
-//     // password: process.env.REDIS_PASSWORD,
-//     retryStrategy: function (count: number) {
-//         logger.debug(`Reconnecting Attempt Number: ${count}`);
-//         const delay = Math.min(count * 100, 3000);
-//         return delay;
-//     },
-// };
-
-export const redisClient = new Redis(
-    process.env.REDIS_URI || "http://localhost"
-);
+export const redisClient = new Redis(configRedis);
 
 const statusConnectRedis = {
     CONNECT: "connect",

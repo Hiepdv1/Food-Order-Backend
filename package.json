@@ -6,7 +6,7 @@
     "scripts": {
         "start": "SET NODE_ENV=development && node Dist/index.js",
         "start:dev": "nodemon src/index.ts",
-        "start:prod": "nodemon src/index.ts SET NODE_ENV=production",
+        "start:prod": "node Dist/index.ts SET NODE_ENV=production",
         "start:debug": "nodemon --inspect --require ts-node/register index.ts",
         "build": "tsc -p .",
         "postinstall": "npm run build"
